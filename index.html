@@ -1,18 +1,471 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My App</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #C84BF0;
+    --purple-light: #E080FF;
+    --purple-dark: #A030D0;
+    --green: #4CAF80;
+    --bg-gradient-top: #B8D4F8;
+    --bg-gradient-mid: #D4B8F0;
+    --bg-gradient-bot: #F0C8E8;
+    --card-bg: rgba(255,255,255,0.75);
+    --text-main: #2A1A3A;
+    --text-secondary: #7A6A8A;
+    --label: #9A8AAA;
+    --border: rgba(200,75,240,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--bg-gradient-top) 0%, var(--bg-gradient-mid) 50%, var(--bg-gradient-bot) 100%);
+    color: var(--text-main);
+    padding: 0 0 60px 0;
+  }
+
+  .bubbles {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.5), rgba(200,75,240,0.08));
+    border: 1px solid rgba(255,255,255,0.6);
+    animation: float linear infinite;
+  }
+
+  .bubble:nth-child(1)  { width:180px; height:180px; left:5%;  top:10%; animation-duration:18s; animation-delay:0s;   opacity:.6; }
+  .bubble:nth-child(2)  { width:120px; height:120px; left:70%; top:20%; animation-duration:22s; animation-delay:3s;   opacity:.5; }
+  .bubble:nth-child(3)  { width:220px; height:220px; left:50%; top:55%; animation-duration:26s; animation-delay:6s;   opacity:.4; }
+  .bubble:nth-child(4)  { width: 80px; height: 80px; left:15%; top:70%; animation-duration:14s; animation-delay:1s;   opacity:.5; }
+  .bubble:nth-child(5)  { width:150px; height:150px; left:80%; top:75%; animation-duration:20s; animation-delay:9s;   opacity:.35; }
+
+  @keyframes float {
+    0%   { transform: translateY(0px) scale(1); }
+    50%  { transform: translateY(-30px) scale(1.04); }
+    100% { transform: translateY(0px) scale(1); }
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 56px 0 24px;
+  }
+
+  .header h1 {
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--text-main);
+  }
+
+  .done-btn {
+    background: var(--purple);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 22px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(200,75,240,0.35);
+    transition: transform .15s, box-shadow .15s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .done-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 22px rgba(200,75,240,0.45);
+  }
+
+  .app-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 20px;
+    border: 1.5px solid rgba(255,255,255,0.8);
+    box-shadow: 0 4px 24px rgba(200,75,240,0.1);
+    padding: 20px 22px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .app-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--bg-gradient-top), var(--bg-gradient-bot));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    box-shadow: 0 4px 12px rgba(200,75,240,0.2);
+    flex-shrink: 0;
+  }
+
+  .app-info h2 {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--text-main);
+  }
+
+  .app-info p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+    font-weight: 600;
+  }
+
+  .version-tag {
+    margin-left: auto;
+    background: rgba(200,75,240,0.12);
+    color: var(--purple-dark);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .section-label {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    color: var(--label);
+    text-transform: uppercase;
+    margin: 24px 0 10px 4px;
+  }
+
+  .section-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 20px;
+    border: 1.5px solid rgba(255,255,255,0.8);
+    box-shadow: 0 4px 24px rgba(200,75,240,0.07);
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .section-item {
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(200,75,240,0.08);
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    transition: background .15s;
+  }
+
+  .section-item:last-child { border-bottom: none; }
+  .section-item:hover { background: rgba(200,75,240,0.04); }
+
+  .item-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .icon-purple { background: rgba(200,75,240,0.15); }
+  .icon-green  { background: rgba(76,175,128,0.15); }
+  .icon-blue   { background: rgba(100,160,255,0.15); }
+  .icon-pink   { background: rgba(255,130,160,0.15); }
+  .icon-orange { background: rgba(255,165,80,0.15);  }
+
+  .item-content h3 {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 4px;
+  }
+
+  .item-content p {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+
+  .highlight-card {
+    background: linear-gradient(135deg, rgba(200,75,240,0.12), rgba(184,212,248,0.3));
+    border: 1.5px solid rgba(200,75,240,0.2);
+    border-radius: 20px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    backdrop-filter: blur(20px);
+  }
+
+  .highlight-card .hl-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+
+  .highlight-card p {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--purple-dark);
+    line-height: 1.5;
+  }
+
+  .contact-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    border: 1.5px solid rgba(255,255,255,0.8);
+    box-shadow: 0 4px 24px rgba(200,75,240,0.07);
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    transition: transform .15s, box-shadow .15s;
+  }
+
+  .contact-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(200,75,240,0.15);
+  }
+
+  .contact-card .item-icon { margin-top: 0; }
+
+  .contact-card .contact-text h3 {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--text-main);
+  }
+
+  .contact-card .contact-text p {
+    font-size: 13px;
+    color: var(--purple);
+    font-weight: 700;
+  }
+
+  .arrow {
+    margin-left: auto;
+    color: var(--label);
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .date-footer {
+    text-align: center;
+    margin-top: 28px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--label);
+  }
+
+  .date-footer span {
+    color: var(--purple);
+    font-weight: 800;
+  }
+
+  .emoji-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0 8px;
+    font-size: 26px;
+  }
+
+  .emoji-bubble {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.7), rgba(200,75,240,0.1));
+    border: 1.5px solid rgba(255,255,255,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(200,75,240,0.12);
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .emoji-bubble:nth-child(2) { animation-delay: .5s; }
+  .emoji-bubble:nth-child(3) { animation-delay: 1s; }
+  .emoji-bubble:nth-child(4) { animation-delay: 1.5s; }
+  .emoji-bubble:nth-child(5) { animation-delay: 2s; }
+</style>
 </head>
-<body style="font-family: Arial; padding: 40px;">
-  <h1>My App</h1>
+<body>
 
-  <p>Welcome to My App.</p>
+<div class="bubbles">
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+</div>
 
-  <h2>Support</h2>
-  <p>Email: support@example.com</p>
+<div class="container">
 
-  <h2>Privacy Policy</h2>
-  <p>Your privacy is important to us.</p>
+  <div class="header">
+    <h1>Privacy Policy</h1>
+    <a href="#" class="done-btn">Done</a>
+  </div>
+
+  <div class="app-card">
+    <div class="app-icon">🐾</div>
+    <div class="app-info">
+      <h2>Animal Sounds</h2>
+      <p>Kids Learning App</p>
+    </div>
+    <div class="version-tag">v1.0</div>
+  </div>
+
+  <div class="highlight-card">
+    <div class="hl-icon">🔒</div>
+    <p>We do not collect any personal data. The app is completely safe for children and requires no registration or sign-in.</p>
+  </div>
+
+  <div class="emoji-row">
+    <div class="emoji-bubble">🐄</div>
+    <div class="emoji-bubble">🦊</div>
+    <div class="emoji-bubble">🐷</div>
+    <div class="emoji-bubble">🦉</div>
+    <div class="emoji-bubble">🦌</div>
+  </div>
+
+  <div class="section-label">What We Collect</div>
+  <div class="section-card">
+    <div class="section-item">
+      <div class="item-icon icon-green">✅</div>
+      <div class="item-content">
+        <h3>No Personal Data</h3>
+        <p>We do not collect names, email addresses, phone numbers, or any other personal information from our users.</p>
+      </div>
+    </div>
+    <div class="section-item">
+      <div class="item-icon icon-green">✅</div>
+      <div class="item-content">
+        <h3>No Accounts Required</h3>
+        <p>No registration needed. The app works immediately after installation — just open and play.</p>
+      </div>
+    </div>
+    <div class="section-item">
+      <div class="item-icon icon-blue">📊</div>
+      <div class="item-content">
+        <h3>Anonymous Analytics</h3>
+        <p>We may collect anonymized usage statistics (e.g. number of launches, OS version) solely to improve the app experience.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Settings & Data Storage</div>
+  <div class="section-card">
+    <div class="section-item">
+      <div class="item-icon icon-purple">📱</div>
+      <div class="item-content">
+        <h3>Local Storage Only</h3>
+        <p>All your preferences — language, animal pack, volume, and speed — are stored exclusively on your device and never transmitted.</p>
+      </div>
+    </div>
+    <div class="section-item">
+      <div class="item-icon icon-orange">🔊</div>
+      <div class="item-content">
+        <h3>No Microphone Access</h3>
+        <p>The app never requests or uses the microphone. It only plays animal sounds for your child to enjoy.</p>
+      </div>
+    </div>
+    <div class="section-item">
+      <div class="item-icon icon-pink">🌐</div>
+      <div class="item-content">
+        <h3>Works Offline</h3>
+        <p>All sounds and images are bundled within the app. No internet connection is required for core functionality.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Children's Safety</div>
+  <div class="section-card">
+    <div class="section-item">
+      <div class="item-icon icon-green">👶</div>
+      <div class="item-content">
+        <h3>Designed for Toddlers</h3>
+        <p>This app complies with COPPA (Children's Online Privacy Protection Act) and GDPR requirements for children's applications.</p>
+      </div>
+    </div>
+    <div class="section-item">
+      <div class="item-icon icon-green">🚫</div>
+      <div class="item-content">
+        <h3>Ad-Free Experience</h3>
+        <p>No advertisements, no in-app purchases, and no links to external websites or services of any kind.</p>
+      </div>
+    </div>
+    <div class="section-item">
+      <div class="item-icon icon-green">🛡️</div>
+      <div class="item-content">
+        <h3>Zero Tracking</h3>
+        <p>We do not use trackers, cookies, or any third-party SDKs designed to collect behavioral or usage data.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Policy Updates</div>
+  <div class="section-card">
+    <div class="section-item">
+      <div class="item-icon icon-blue">📝</div>
+      <div class="item-content">
+        <h3>How We Notify You</h3>
+        <p>Any changes to this policy will be communicated via an app update in the App Store. Continued use of the app constitutes acceptance of the updated policy.</p>
+      </div>
+    </div>
+    <div class="section-item">
+      <div class="item-icon icon-purple">🗑️</div>
+      <div class="item-content">
+        <h3>Deleting Your Data</h3>
+        <p>To remove all locally stored data, simply uninstall the app from your device. No additional steps required.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Contact Us</div>
+  <a href="mailto:hello@example.com" class="contact-card">
+    <div class="item-icon icon-purple">✉️</div>
+    <div class="contact-text">
+      <h3>Have a question?</h3>
+      <p>hello@example.com</p>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+  <div class="date-footer">
+    Last updated: <span>May 20, 2026</span>
+  </div>
+
+</div>
 </body>
 </html>
