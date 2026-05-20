@@ -83,27 +83,6 @@
     color: var(--text-main);
   }
 
-  .done-btn {
-    background: var(--purple);
-    color: #fff;
-    border: none;
-    border-radius: 50px;
-    padding: 10px 22px;
-    font-family: 'Nunito', sans-serif;
-    font-size: 15px;
-    font-weight: 800;
-    cursor: pointer;
-    box-shadow: 0 4px 16px rgba(200,75,240,0.35);
-    transition: transform .15s, box-shadow .15s;
-    text-decoration: none;
-    display: inline-block;
-  }
-
-  .done-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 22px rgba(200,75,240,0.45);
-  }
-
   /* App info card */
   .app-card {
     background: var(--card-bg);
@@ -343,7 +322,6 @@
 
   <div class="header">
     <h1>Конфіденційність</h1>
-    <a href="#" class="done-btn">Готово</a>
   </div>
 
   <!-- App card -->
